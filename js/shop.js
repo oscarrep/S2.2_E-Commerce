@@ -79,21 +79,19 @@ var total = 0;
 let productIndex = 0;
 let inCart = false;
 
-let productsQtty = products.map(products => ({ ...products, quantity: 0 }));
-console.log(productsQtty);
-
+let productsQtty = products.map(products => ({ ...products, quantity: 0 })); // can't modify products array, so i'm creating a new one with a quantity property
 
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
-    productIndex = productsQtty.findIndex(product => product.id === id);
-    console.log(productIndex);
+    productIndex = productsQtty.findIndex(product => product.id === id); // finds index of product with passed id in the product array
     // 2. Add found product to the cart array
-    const cartIndex = cart.findIndex(product => product.id === id);
+    const cartIndex = cart.findIndex(product => product.id === id); // finds index of product with passed id in the cart array
 
-    if (cartIndex == productIndex) cart[productIndex].quantity += 1;
+    // TODO: if product with passed id is in cart: qtty +1, else copy it to cart array then qtty +1
+    if (cartIndex !== -1) cart[cartIndex].quantity++;
     else {
-        cart[productIndex].quantity += 1; // qtty
-        cart.push(productsQtty[productIndex]);
+        const toAdd = { ...productsQtty[productIndex], quantity: 1 }; // copies obj at productIndex to cart array
+        cart.push(toAdd);
     }
     console.log(cart);
 }
