@@ -1,5 +1,5 @@
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
-var products = [
+let products = [
     {
         id: 1,
         name: 'cooking oil',
@@ -69,15 +69,33 @@ var products = [
 // ** You'll understand the code better than with console.log(), and you'll also find errors faster. 
 // ** Don't hesitate to seek help from your peers or your mentor if you still struggle with debugging.
 
-// Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
+// Improved version of cartList. Cart is an array of products (objects), but 
+// each one has a quantity field to define its quantity, so these products are not repeated.
 var cart = [];
 
 var total = 0;
 
 // Exercise 1
+let productIndex = 0;
+let inCart = false;
+
+let productsQtty = products.map(products => ({ ...products, quantity: 0 }));
+console.log(productsQtty);
+
+
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
+    productIndex = productsQtty.findIndex(product => product.id === id);
+    console.log(productIndex);
     // 2. Add found product to the cart array
+    const cartIndex = cart.findIndex(product => product.id === id);
+
+    if (cartIndex == productIndex) cart[productIndex].quantity += 1;
+    else {
+        cart[productIndex].quantity += 1; // qtty
+        cart.push(productsQtty[productIndex]);
+    }
+    console.log(cart);
 }
 
 // Exercise 2
