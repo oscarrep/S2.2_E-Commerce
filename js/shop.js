@@ -97,8 +97,8 @@ function buy(id) {
 }
 
 // Exercise 2
-function cleanCart() {
-
+function cleanCart() { // TODO: delete all items from cart array
+    cart.splice(0);
 }
 
 // Exercise 3
