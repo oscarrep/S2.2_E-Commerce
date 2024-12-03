@@ -69,11 +69,10 @@ let products = [
 // ** You'll understand the code better than with console.log(), and you'll also find errors faster. 
 // ** Don't hesitate to seek help from your peers or your mentor if you still struggle with debugging.
 
-// Improved version of cartList. Cart is an array of products (objects), but 
-// each one has a quantity field to define its quantity, so these products are not repeated.
-var cart = [];
+// Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
+let cart = [];
 
-var total = 0;
+let total = 0;
 
 // Exercise 1
 let productIndex = 0;
@@ -104,6 +103,12 @@ function cleanCart() { // TODO: delete all items from cart array
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+    // TODO: array cart items prices, array item quantities.
+    let prices = cart.map(items => items.price);
+    let qtties = cart.map(items => items.quantity);
+    // TODO: multiply price at index i * qtty at index i
+    for (let i = 0; i < prices.length; i++) { total += prices[i] * qtties[i]; }
+    return total;
 }
 
 // Exercise 4
