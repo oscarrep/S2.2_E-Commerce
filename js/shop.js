@@ -113,12 +113,10 @@ function calculateTotal() {
 }
 
 // Exercise 4
-let oilDisc = 0;
-let cakeDisc = 0;
-let subtotalWithDiscount = 0;
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
     // TODO: check qtties, if qtty >= offer->number apply discount in ofer->percent
+    let subtotalWithDiscount = 0;
 
     cart.forEach(item => {
         let itemTotal = item.price * item.quantity; // calcs total price of an item
@@ -135,6 +133,29 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    /*<tr>
+        <th scope="row">Cooking oil</th>
+        <td>$10.5</td>
+        <td>2</td>
+        <td>$21</td>
+    </tr>*/
+    let text = '';
+    for (let i = 0; i < cart.length; i++) {
+        text = `
+        <tr>
+            <th scope="row">${cart[i].name}</th>
+            <td>${cart[i].price}</td>
+            <td>${cart[i].quantity}</td>
+            <td>${cart[i].price}</td>
+        </tr>`;
+
+        text += text + text;
+    }
+
+
+    return document.getElementById('cart_list').innerHTML = text;
+
+
 }
 
 
@@ -146,7 +167,5 @@ function removeFromCart(id) {
 }
 
 function open_modal() {
-    applyPromotionsCart();
-    console.log(subtotalWithDiscount);
     printCart();
 }
