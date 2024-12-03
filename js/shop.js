@@ -75,14 +75,13 @@ let cart = [];
 let total = 0;
 
 // Exercise 1
-let productIndex = 0;
 let inCart = false;
 
 let productsQtty = products.map(products => ({ ...products, quantity: 0 })); // can't modify products array, so i'm creating a new one with a quantity property
 
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
-    productIndex = productsQtty.findIndex(product => product.id === id); // finds index of product with passed id in the product array
+    let productIndex = productsQtty.findIndex(product => product.id === id); // finds index of product with passed id in the product array
     // 2. Add found product to the cart array
     const cartIndex = cart.findIndex(product => product.id === id); // finds index of product with passed id in the cart array
 
@@ -101,19 +100,36 @@ function cleanCart() { // TODO: delete all items from cart array
 }
 
 // Exercise 3
+let prices = [];
+let qtties = [];
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
     // TODO: array cart items prices, array item quantities.
-    let prices = cart.map(items => items.price);
-    let qtties = cart.map(items => items.quantity);
+    prices = cart.map(items => items.price);
+    qtties = cart.map(items => items.quantity);
     // TODO: multiply price at index i * qtty at index i
     for (let i = 0; i < prices.length; i++) { total += prices[i] * qtties[i]; }
     return total;
 }
 
 // Exercise 4
+let oilDisc = 0;
+let cakeDisc = 0;
+let subtotalWithDiscount = 0;
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    // TODO: check qtties, if qtty >= offer->number apply discount in ofer->percent
+
+    cart.forEach(item => {
+        let itemTotal = item.price * item.quantity; // calcs total price of an item
+        if (item.offer && item.quantity >= item.offer.number) {
+            let discount = item.price * (item.offer.percent / 100);
+            itemTotal -= discount * item.quantity;
+        }
+        subtotalWithDiscount += itemTotal;
+    })
+
+    return subtotalWithDiscount;
 }
 
 // Exercise 5
@@ -130,5 +146,7 @@ function removeFromCart(id) {
 }
 
 function open_modal() {
+    applyPromotionsCart();
+    console.log(subtotalWithDiscount);
     printCart();
 }
