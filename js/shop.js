@@ -97,6 +97,7 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() { // TODO: delete all items from cart array
+    total = 0;
     cart.splice(0);
 }
 
@@ -108,14 +109,19 @@ function calculateTotal() {
     qtties = cart.map(items => items.quantity);
     // TODO: multiply price at index i * qtty at index i
     cart.forEach((item) => {
-        let discItemIndex = discounted.findIndex(discItem => discItem.id === item.id);
-        let itemIndex = cart.findIndex(item => item.id === item.id);
+        if (item.id === 1 && item.quantity >= 3) {//cooking oil
+            let discItem = discounted.find(discItem => discItem.id === 1);
+            total += discItem ? discItem.subtotalWithDiscount : item.price * item.quantity;
+        } else if (item.id === 3 && item.quantity >= 10) {//cupcake mix
+            let discItem = discounted.find(discItem => discItem.id === 3);
+            total += discItem ? discItem.subtotalWithDiscount : item.price * item.quantity;
+        } else {//no discounts
+            total += item.price * item.quantity;
+        }
+    });
 
-        if (item.id != 1 && item.id != 3) total += prices[itemIndex] * qtties[itemIndex];
-        else if (item.id == 1) total += discounted[discItemIndex].subtotalWithDiscount;
-        else if (item.id == 3) total += discounted[discItemIndex].subtotalWithDiscount;
-    })
-    return document.getElementById('total_price').innerHTML = total;
+    document.getElementById('total_price').innerHTML = total.toFixed(2);
+    return total;
 }
 
 // Exercise 4
@@ -140,6 +146,7 @@ function printCart() {
     let text = '';
     cart.forEach((item) => {
         let itemIndex = discounted.findIndex(discItem => discItem.id === item.id);
+        let cartItemIndex = cart.findIndex(cItem => cItem.id === item.id);
         if (item.id != 1 && item.id != 3) {
             text += `
             <tr>
@@ -150,22 +157,44 @@ function printCart() {
             </tr>`;
         }
         else if (item.id == 1) {
-            text += `
+            if (cart[cartItemIndex].quantity >= 3) {
+                text += `
             <tr>
                 <th scope="row">${item.name}</th>
                 <td>${item.price}</td>
                 <td>${item.quantity}</td>
                 <td>$${discounted[itemIndex].subtotalWithDiscount}</td>
             </tr>`;
+            }
+            else if (cart[cartItemIndex].quantity < 3) {
+                text += `
+            <tr>
+                <th scope="row">${item.name}</th>
+                <td>${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>$${item.price * item.quantity}</td>
+            </tr>`;
+            }
         }
         else if (item.id == 3) {
-            text += `
+            if (cart[cartItemIndex].quantity >= 10) {
+                text += `
             <tr>
                 <th scope="row">${item.name}</th>
                 <td>${item.price}</td>
                 <td>${item.quantity}</td>
                 <td>$${discounted[itemIndex].subtotalWithDiscount}</td>
             </tr>`;
+            }
+            else if (cart[cartItemIndex].quantity < 10) {
+                text += `
+            <tr>
+                <th scope="row">${item.name}</th>
+                <td>${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>$${item.price * item.quantity}</td>
+            </tr>`;
+            }
         }
     })
     return document.getElementById('cart_list').innerHTML = text;
@@ -181,8 +210,8 @@ function removeFromCart(id) {
 
 function open_modal() {
     applyPromotionsCart();
-    console.log(discounted);
+    console.log('discounted: ' + discounted);
     calculateTotal();
-    console.log(total);
+    console.log('total: ' + total);
     printCart();
 }
