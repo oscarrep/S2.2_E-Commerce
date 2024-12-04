@@ -71,12 +71,13 @@ let products = [
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 let cart = [];
+let prices = [];
+let qtties = [];
+let discounted = [];
 
 let total = 0;
 
 // Exercise 1
-let inCart = false;
-
 let productsQtty = products.map(products => ({ ...products, quantity: 0 })); // can't modify products array, so i'm creating a new one with a quantity property
 
 function buy(id) {
@@ -100,20 +101,24 @@ function cleanCart() { // TODO: delete all items from cart array
 }
 
 // Exercise 3
-let prices = [];
-let qtties = [];
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
     // TODO: array cart items prices, array item quantities.
     prices = cart.map(items => items.price);
     qtties = cart.map(items => items.quantity);
     // TODO: multiply price at index i * qtty at index i
-    for (let i = 0; i < prices.length; i++) { total += prices[i] * qtties[i]; }
-    return total;
+    cart.forEach((item) => {
+        let discItemIndex = discounted.findIndex(discItem => discItem.id === item.id);
+        let itemIndex = cart.findIndex(item => item.id === item.id);
+
+        if (item.id != 1 && item.id != 3) total += prices[itemIndex] * qtties[itemIndex];
+        else if (item.id == 1) total += discounted[discItemIndex].subtotalWithDiscount;
+        else if (item.id == 3) total += discounted[discItemIndex].subtotalWithDiscount;
+    })
+    return document.getElementById('total_price').innerHTML = total;
 }
 
 // Exercise 4
-let discounted = [];
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
     // TODO: check qtties, if qtty >= offer->number apply discount in ofer->percent
@@ -121,7 +126,7 @@ function applyPromotionsCart() {
     cart.forEach(item => {
         if (item.offer && item.quantity >= item.offer.number) {
             let discount = item.price * (item.offer.percent / 100);
-            let discountedTotal = (item.price - discount) * item.quantity;
+            let discountedTotal = Number(((item.price - discount) * item.quantity).toFixed(2));
 
             discounted.push({ ...item, subtotalWithDiscount: discountedTotal });
         }
@@ -130,45 +135,40 @@ function applyPromotionsCart() {
 }
 
 // Exercise 5
-function printCart(discounted) {
+function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
     let text = '';
     cart.forEach((item) => {
+        let itemIndex = discounted.findIndex(discItem => discItem.id === item.id);
         if (item.id != 1 && item.id != 3) {
             text += `
             <tr>
                 <th scope="row">${item.name}</th>
                 <td>${item.price}</td>
                 <td>${item.quantity}</td>
-                <td>${item.price * item.quantity}</td>
+                <td>$${item.price * item.quantity}</td>
             </tr>`;
         }
         else if (item.id == 1) {
-            let index = discounted.findIndex(item => item.id === id);
             text += `
             <tr>
                 <th scope="row">${item.name}</th>
                 <td>${item.price}</td>
                 <td>${item.quantity}</td>
-                <td>${discounted[index].subtotalWithDiscount}</td>
+                <td>$${discounted[itemIndex].subtotalWithDiscount}</td>
             </tr>`;
         }
         else if (item.id == 3) {
-            let index = discounted.findIndex(item => item.id === id);
             text += `
             <tr>
                 <th scope="row">${item.name}</th>
                 <td>${item.price}</td>
                 <td>${item.quantity}</td>
-                <td>${discounted[index].subtotalWithDiscount}</td>
+                <td>$${discounted[itemIndex].subtotalWithDiscount}</td>
             </tr>`;
         }
     })
-
-
     return document.getElementById('cart_list').innerHTML = text;
-
-
 }
 
 
@@ -179,6 +179,10 @@ function removeFromCart(id) {
 
 }
 
-function open_modal(discounted) {
-    printCart(discounted);
+function open_modal() {
+    applyPromotionsCart();
+    console.log(discounted);
+    calculateTotal();
+    console.log(total);
+    printCart();
 }
