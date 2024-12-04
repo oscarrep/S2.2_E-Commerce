@@ -113,44 +113,57 @@ function calculateTotal() {
 }
 
 // Exercise 4
+let discounted = [];
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
     // TODO: check qtties, if qtty >= offer->number apply discount in ofer->percent
-    let subtotalWithDiscount = 0;
 
     cart.forEach(item => {
-        let itemTotal = item.price * item.quantity; // calcs total price of an item
         if (item.offer && item.quantity >= item.offer.number) {
             let discount = item.price * (item.offer.percent / 100);
-            itemTotal -= discount * item.quantity;
-        }
-        subtotalWithDiscount += itemTotal;
-    })
+            let discountedTotal = (item.price - discount) * item.quantity;
 
-    return subtotalWithDiscount;
+            discounted.push({ ...item, subtotalWithDiscount: discountedTotal });
+        }
+    });
+    return discounted;
 }
 
 // Exercise 5
-function printCart() {
+function printCart(discounted) {
     // Fill the shopping cart modal manipulating the shopping cart dom
-    /*<tr>
-        <th scope="row">Cooking oil</th>
-        <td>$10.5</td>
-        <td>2</td>
-        <td>$21</td>
-    </tr>*/
     let text = '';
-    for (let i = 0; i < cart.length; i++) {
-        text = `
-        <tr>
-            <th scope="row">${cart[i].name}</th>
-            <td>${cart[i].price}</td>
-            <td>${cart[i].quantity}</td>
-            <td>${cart[i].price}</td>
-        </tr>`;
-
-        text += text + text;
-    }
+    cart.forEach((item) => {
+        if (item.id != 1 && item.id != 3) {
+            text += `
+            <tr>
+                <th scope="row">${item.name}</th>
+                <td>${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>${item.price * item.quantity}</td>
+            </tr>`;
+        }
+        else if (item.id == 1) {
+            let index = discounted.findIndex(item => item.id === id);
+            text += `
+            <tr>
+                <th scope="row">${item.name}</th>
+                <td>${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>${discounted[index].subtotalWithDiscount}</td>
+            </tr>`;
+        }
+        else if (item.id == 3) {
+            let index = discounted.findIndex(item => item.id === id);
+            text += `
+            <tr>
+                <th scope="row">${item.name}</th>
+                <td>${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>${discounted[index].subtotalWithDiscount}</td>
+            </tr>`;
+        }
+    })
 
 
     return document.getElementById('cart_list').innerHTML = text;
@@ -166,6 +179,6 @@ function removeFromCart(id) {
 
 }
 
-function open_modal() {
-    printCart();
+function open_modal(discounted) {
+    printCart(discounted);
 }
