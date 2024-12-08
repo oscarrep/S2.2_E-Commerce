@@ -99,6 +99,8 @@ function buy(id) {
 function cleanCart() { // TODO: delete all items from cart array
     total = 0;
     cart.splice(0);
+    document.getElementById('cart_list').innerHTML = '';
+    document.getElementById('total_price').innerHTML = total;
 }
 
 // Exercise 3
@@ -196,8 +198,9 @@ function printCart() {
             </tr>`;
             }
         }
-    })
-    return document.getElementById('cart_list').innerHTML = text;
+    });
+
+    document.getElementById('cart_list').innerHTML = text;
 }
 
 
