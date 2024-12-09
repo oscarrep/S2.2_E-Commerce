@@ -23,32 +23,32 @@ function validate(e) {
 
 	// Validate fields entered by the user: name, phone, password, and email
 	if (!checkWord(fName) || fName.length < 3) {
-		errorName.style.display = 'block'
+		errorName.style.display = 'block';
 		error++;
 	} else errorName.style.display = 'none';
 
 	if (!checkWord(fLastN) || fLastN.length < 3) {
-		errorLastN.style.display = 'block'
+		errorLastN.style.display = 'block';
 		error++;
 	} else errorLastN.style.display = 'none';
 
 	if (!fEmail.includes('@') || fEmail.length < 3) {
-		errorEmail.style.display = 'block'
+		errorEmail.style.display = 'block';
 		error++;
 	} else errorEmail.style.display = 'none';
 
 	if (!checkPassword(fPassword) || fPassword.length < 4 || fPassword.length > 8) {
-		errorPassword.style.display = 'block'
+		errorPassword.style.display = 'block';
 		error++;
 	} else errorPassword.style.display = 'none';
 
 	if (fPhone.length !== 9 || isNaN(fPhone)) {
-		errorPhone.style.display = 'block'
+		errorPhone.style.display = 'block';
 		error++;
 	} else errorPhone.style.display = 'none';
 
 	if (fAddress.length < 3) {
-		errorAddress.style.display = 'block'
+		errorAddress.style.display = 'block';
 		error++;
 	} else errorAddress.style.display = 'none';
 

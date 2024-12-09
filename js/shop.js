@@ -105,6 +105,7 @@ function cleanCart() { // TODO: delete all items from cart array
 
 // Exercise 3
 function calculateTotal() {
+    total = 0;
     // Calculate total price of the cart using the "cartList" array
     // TODO: array cart items prices, array item quantities.
     prices = cart.map(items => items.price);
@@ -153,9 +154,10 @@ function printCart() {
             text += `
             <tr>
                 <th scope="row">${item.name}</th>
-                <td>${item.price}</td>
+                <td>$${item.price}</td>
                 <td>${item.quantity}</td>
                 <td>$${item.price * item.quantity}</td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(${item.id})"> - </button></td>
             </tr>`;
         }
         else if (item.id == 1) {
@@ -163,18 +165,20 @@ function printCart() {
                 text += `
             <tr>
                 <th scope="row">${item.name}</th>
-                <td>${item.price}</td>
+                <td>$${item.price}</td>
                 <td>${item.quantity}</td>
                 <td>$${discounted[itemIndex].subtotalWithDiscount}</td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(1)"> - </button></td>
             </tr>`;
             }
             else if (cart[cartItemIndex].quantity < 3) {
                 text += `
             <tr>
                 <th scope="row">${item.name}</th>
-                <td>${item.price}</td>
+                <td>$${item.price}</td>
                 <td>${item.quantity}</td>
                 <td>$${item.price * item.quantity}</td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(1)"> - </button></td>
             </tr>`;
             }
         }
@@ -183,18 +187,20 @@ function printCart() {
                 text += `
             <tr>
                 <th scope="row">${item.name}</th>
-                <td>${item.price}</td>
+                <td>$${item.price}</td>
                 <td>${item.quantity}</td>
                 <td>$${discounted[itemIndex].subtotalWithDiscount}</td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(3)"> - </button></td>
             </tr>`;
             }
             else if (cart[cartItemIndex].quantity < 10) {
                 text += `
             <tr>
                 <th scope="row">${item.name}</th>
-                <td>${item.price}</td>
+                <td>$${item.price}</td>
                 <td>${item.quantity}</td>
                 <td>$${item.price * item.quantity}</td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(3)"> - </button></td>
             </tr>`;
             }
         }
@@ -208,6 +214,26 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
+    const cartIndex = cart.findIndex(item => item.id === id); // have to find index of product with passed id in the cart array
+    /*console.log(cart);
+    console.log('index: ' + cartIndex);
+    console.log('id: ' + cart[cartIndex].id);*/
+    console.log('------REMOVING ITEM------');
+
+    if (cart[cartIndex].quantity > 1) {
+        cart[cartIndex].quantity -= 1;
+        console.log(`-1 ${cart[cartIndex].name}, remaining: ${cart[cartIndex].quantity}`);
+    }
+    else if (cart[cartIndex].quantity === 1) {
+        console.log(`${cart[cartIndex].name} removed`);
+        cart.splice(cartIndex, 1);
+    }
+    console.log(cart);
+
+    // need to update promotions, total and print cart after every removal
+    applyPromotionsCart();
+    calculateTotal();
+    printCart();
 
 }
 
