@@ -158,6 +158,8 @@ function printCart() {
                 <td>${item.quantity}</td>
                 <td>$${item.price * item.quantity}</td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(${item.id})"> - </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="addToCart(${item.id})"> + </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="deleteFromCart(${item.id})"> Delete </button></td>
             </tr>`;
         }
         else if (item.id == 1) {
@@ -169,6 +171,8 @@ function printCart() {
                 <td>${item.quantity}</td>
                 <td>$${discounted[itemIndex].subtotalWithDiscount}</td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(1)"> - </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="addToCart(1)"> + </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="deleteFromCart(1)"> Delete </button></td>
             </tr>`;
             }
             else if (cart[cartItemIndex].quantity < 3) {
@@ -179,6 +183,8 @@ function printCart() {
                 <td>${item.quantity}</td>
                 <td>$${item.price * item.quantity}</td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(1)"> - </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="addToCart(1)"> + </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="deleteFromCart(1)"> Delete </button></td>
             </tr>`;
             }
         }
@@ -191,6 +197,8 @@ function printCart() {
                 <td>${item.quantity}</td>
                 <td>$${discounted[itemIndex].subtotalWithDiscount}</td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(3)"> - </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="addToCart(3)"> + </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="deleteFromCart(3)"> Delete </button></td>
             </tr>`;
             }
             else if (cart[cartItemIndex].quantity < 10) {
@@ -201,6 +209,8 @@ function printCart() {
                 <td>${item.quantity}</td>
                 <td>$${item.price * item.quantity}</td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(3)"> - </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="addToCart(3)"> + </button></td>
+                <td><button class="btn btn-outline-dark fw-bolder" onclick="deleteFromCart(3)"> Delete </button></td>
             </tr>`;
             }
         }
@@ -215,9 +225,6 @@ function printCart() {
 // Exercise 7
 function removeFromCart(id) {
     const cartIndex = cart.findIndex(item => item.id === id); // have to find index of product with passed id in the cart array
-    /*console.log(cart);
-    console.log('index: ' + cartIndex);
-    console.log('id: ' + cart[cartIndex].id);*/
     console.log('------REMOVING ITEM------');
 
     if (cart[cartIndex].quantity > 1) {
@@ -228,6 +235,39 @@ function removeFromCart(id) {
         console.log(`${cart[cartIndex].name} removed`);
         cart.splice(cartIndex, 1);
     }
+    console.log(cart);
+
+    // need to update promotions, total and print cart after every removal
+    applyPromotionsCart();
+    calculateTotal();
+    printCart();
+
+}
+
+// Exercise 8
+function addToCart(id) {
+    const cartIndex = cart.findIndex(item => item.id === id); // have to find index of product with passed id in the cart array
+    console.log('------ADDING ITEM------');
+
+    cart[cartIndex].quantity += 1;
+    console.log(`+1 ${cart[cartIndex].name}, remaining: ${cart[cartIndex].quantity}`);
+
+    console.log(cart);
+
+    // need to update promotions, total and print cart after every removal
+    applyPromotionsCart();
+    calculateTotal();
+    printCart();
+
+}
+
+function deleteFromCart(id) {
+    const cartIndex = cart.findIndex(item => item.id === id); // have to find index of product with passed id in the cart array
+    console.log('------DELETING ITEM------');
+
+    console.log(`${cart[cartIndex].name} removed`);
+    cart.splice(cartIndex, 1);
+
     console.log(cart);
 
     // need to update promotions, total and print cart after every removal
