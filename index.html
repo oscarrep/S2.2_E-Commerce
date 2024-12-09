@@ -19,14 +19,15 @@
 
 	<style>
 		body {
-			font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 		}
 	</style>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="50">
 	<!-- Navigation-->
-	<nav class="navbar py-3 py-lg-0 navbar-dark bg-dark navbar-expand-lg" id="navbar-example2">
+	<nav class="navbar py-3 py-lg-0 navbar-dark navbar-expand-lg" id="navbar-example2"
+		style="background-color: #063558;">
 		<div class="container d-flex">
 			<a class="navbar-brand" href="#!">ShopNow</a>
 			<div class="d-flex flex-row order-lg-last align-items-center">
@@ -40,8 +41,8 @@
 						<a href="javascript:void(0)" class="btn btn-outline-light flex-center" type="button"
 							data-bs-toggle="modal" data-bs-target="#cartModal" onclick="open_modal()"
 							data-bs-auto-close="outside">
-							<i class="fas fa-shopping-cart me-1"></i> Cart <span
-								class="badge bg-dark text-white ms-1 rounded-pill" id="count_product">0</span>
+							<i class="fas fa-shopping-cart me-1"></i> My Cart <span
+								class="badge bg-light text-dark ms-1 rounded-pill" id="count_product">0</span>
 						</a>
 					</li>
 				</ul>
@@ -52,13 +53,13 @@
 				<ul class="navbar-nav me-auto mb-4 mb-lg-0 ms-lg-5">
 					<li class="nav-item">
 						<a class="nav-link text-white" href="#grocery"><i class="fas fa-shopping-basket"></i>
-							Grocery</a>
+							Grocery </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-white" href="#beauty"><i class="fas fa-heart"></i> Beauty</a>
+						<a class="nav-link text-white" href="#beauty"><i class="fas fa-heart"></i> Beauty </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-white" href="#clothes"><i class="fas fa-tshirt"></i> Clothes</a>
+						<a class="nav-link text-white" href="#clothes"><i class="fas fa-tshirt"></i> Clothes </a>
 					</li>
 
 				</ul>
@@ -67,30 +68,23 @@
 	</nav>
 
 	<!-- Header-->
-	<header class="bg-dark">
-		<!-- Background image -->
-		<div class="text-center bg-image position-relative" style=" background-image: url('https://static.vecteezy.com/system/resources/previews/004/858/012/non_2x/online-shopping-on-phone-buy-sell-business-digital-web-banner-application-money-advertising-payment-ecommerce-illustration-search-vector.jpg'); 
-			height: 250px;">
-			<div class="mask position-absolute"
-				style="background-color: rgba(0, 0, 0, 0.6); top: 0; left: 0; right: 0; bottom: 0;">
-				<div class="d-flex justify-content-center align-items-center h-100">
-					<div class="text-white p-5">
-						<h1 class="mb-3">IT Academy Shop</h1>
-						<h4 class="mb-3">Get up to 50% off Today Only!</h4>
-					</div>
-				</div>
+	<header style="background-color: #095086;">
+		<div class="d-flex justify-content-center align-items-center h-100">
+			<div class="text-white p-5">
+				<h1 class="mb-3">IT Academy Shop</h1>
+				<h4 class="mb-3">Get up to 50% off Today Only!</h4>
 			</div>
 		</div>
 	</header>
 
 	<!-- Section-->
-	<section class="pt-5 bg-dark" id="grocery">
+	<section class="pt-5" id="grocery" style="background-color: #0C66AC;">
 		<h2 class="text-center text-white"><i class="fas fa-shopping-basket pe-3"></i>Grocery</h2>
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 				<div class="col mb-5">
-					<div class="card h-100 border-white bg-dark text-white">
-						<img class="card-img-top" src="./images/oil.png" alt="..." style="height: 100%; width: 100%;"/>
+					<div class="card h-100 border-dark bg-light text-dark">
+						<img class="card-img-top" src="./images/oil.png" alt="..." style="height: 100%; width: 100%;" />
 						<div class="card-body p-4">
 							<div class="text-center">
 								<h5 class="fw-bolder">Cooking Oil</h5>
@@ -99,13 +93,14 @@
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center"><button type="button" onclick="buy(1)"
-									class="btn btn-outline-light">Add to cart</button></div>
+									class="btn btn-outline-dark">Add to cart</button></div>
 						</div>
 					</div>
 				</div>
 				<div class="col mb-5">
-					<div class="card h-100 border-white bg-dark text-white">
-						<img class="card-img-top" src="./images/pasta.png" alt="..." style="height: 100%; width: 100%;"/>
+					<div class="card h-100 border-dark bg-light text-dark">
+						<img class="card-img-top" src="./images/pasta.png" alt="..."
+							style="height: 100%; width: 100%;" />
 						<div class="card-body p-4">
 							<div class="text-center">
 								<h5 class="fw-bolder">Pasta</h5>
@@ -114,13 +109,14 @@
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center"><button type="button" onclick="buy(2)"
-									class="btn btn-outline-light">Add to cart</button></div>
+									class="btn btn-outline-dark">Add to cart</button></div>
 						</div>
 					</div>
 				</div>
 				<div class="col mb-5">
-					<div class="card h-100 border-white bg-dark text-white">
-						<img class="card-img-top" src="./images/cake.png" alt="..." style="height: 100%; width: 100%;"/>
+					<div class="card h-100 border-dark bg-light text-dark">
+						<img class="card-img-top" src="./images/cake.png" alt="..."
+							style="height: 100%; width: 100%;" />
 						<div class="card-body p-4">
 							<div class="text-center">
 								<h5 class="fw-bolder">Instant cake mixture</h5>
@@ -129,7 +125,7 @@
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center"><button type="button" onclick="buy(3)"
-									class="btn btn-outline-light">Add to cart</button></div>
+									class="btn btn-outline-dark">Add to cart</button></div>
 						</div>
 					</div>
 				</div>
@@ -137,13 +133,13 @@
 			</div>
 		</div>
 	</section>
-	<section class="pt-5 bg-dark" id="beauty">
+	<section class="pt-5" id="beauty" style="background-color: #0F7DD2;">
 		<h2 class="text-center text-white"><i class="fas fa-heart pe-3"></i>Beauty</h2>
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 				<div class="col mb-5">
-					<div class="card h-100 border-white bg-dark text-white">
-						<img class="card-img-top" src="./images/allinone.webp" alt="..." style="height: 100%;"/>
+					<div class="card h-100 border-dark bg-light text-dark">
+						<img class="card-img-top" src="./images/allinone.webp" alt="..." style="height: 100%;" />
 						<div class="card-body p-4">
 							<div class="text-center">
 								<h5 class="fw-bolder">All-in-1</h5>
@@ -152,13 +148,13 @@
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center"><button type="button" onclick="buy(4)"
-									class="btn btn-outline-light">Add to cart</button></div>
+									class="btn btn-outline-dark">Add to cart</button></div>
 						</div>
 					</div>
 				</div>
 				<div class="col mb-5">
-					<div class="card h-100 border-white bg-dark text-white">
-						<img class="card-img-top" src="./images/makeup.webp" alt="..."style="height: 100%;" />
+					<div class="card h-100 border-dark bg-light text-dark">
+						<img class="card-img-top" src="./images/makeup.webp" alt="..." style="height: 100%;" />
 						<div class="card-body p-4">
 							<div class="text-center">
 								<h5 class="fw-bolder">Zero makeup kit</h5>
@@ -167,12 +163,12 @@
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center"><button type="button" onclick="buy(5)"
-									class="btn btn-outline-light">Add to cart</button></div>
+									class="btn btn-outline-dark">Add to cart</button></div>
 						</div>
 					</div>
 				</div>
 				<div class="col mb-5">
-					<div class="card h-100 border-white bg-dark text-white">
+					<div class="card h-100 border-dark bg-light text-dark">
 						<img class="card-img-top" src="./images/lip-tints.webp" alt="..." />
 						<div class="card-body p-4">
 							<div class="text-center">
@@ -182,7 +178,7 @@
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center"><button type="button" onclick="buy(6)"
-									class="btn btn-outline-light">Add to cart</button></div>
+									class="btn btn-outline-dark">Add to cart</button></div>
 						</div>
 					</div>
 				</div>
@@ -190,13 +186,13 @@
 			</div>
 		</div>
 	</section>
-	<section class="pt-5 bg-dark" id="clothes">
+	<section class="pt-5" id="clothes" style="background-color: #1A93EF;">
 		<h2 class="text-center text-white"><i class="fas fa-tshirt pe-3"></i>Clothes</h2>
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 				<div class="col mb-5">
-					<div class="card h-100 border-white bg-dark text-white">
-						<img class="card-img-top" src="./images/product.svg" alt="..." style="height: 100%;"/>
+					<div class="card h-100 border-dark bg-light text-dark">
+						<img class="card-img-top" src="./images/dress.webp" alt="..." style="height: 100%;" />
 						<div class="card-body p-4">
 							<div class="text-center">
 								<h5 class="fw-bolder">Lawn dress</h5>
@@ -205,13 +201,13 @@
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center"><button type="button" onclick="buy(7)"
-									class="btn btn-outline-light">Add to cart</button></div>
+									class="btn btn-outline-dark">Add to cart</button></div>
 						</div>
 					</div>
 				</div>
 				<div class="col mb-5">
-					<div class="card h-100 border-white bg-dark text-white">
-						<img class="card-img-top" src="./images/product.svg" alt="..." style="height: 100%;"/>
+					<div class="card h-100 border-dark bg-light text-dark">
+						<img class="card-img-top" src="./images/lawnchiffon.webp" alt="..." style="height: 100%;" />
 						<div class="card-body p-4">
 							<div class="text-center">
 								<h5 class="fw-bolder">Lawn-chiffon combo</h5>
@@ -220,13 +216,13 @@
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center"><button type="button" onclick="buy(8)"
-									class="btn btn-outline-light">Add to cart</button></div>
+									class="btn btn-outline-dark">Add to cart</button></div>
 						</div>
 					</div>
 				</div>
 				<div class="col mb-5">
-					<div class="card h-100 border-white bg-dark text-white">
-						<img class="card-img-top" src="./images/product.svg" alt="..." style="height: 100%;"/>
+					<div class="card h-100 border-dark bg-light text-dark">
+						<img class="card-img-top" src="./images/frock.webp" alt="..." style="height: 100%;" />
 						<div class="card-body p-4">
 							<div class="text-center">
 								<h5 class="fw-bolder">Toddler Frock</h5>
@@ -235,7 +231,7 @@
 						</div>
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center"><button type="button" onclick="buy(9)"
-									class="btn btn-outline-light">Add to cart</button></div>
+									class="btn btn-outline-dark">Add to cart</button></div>
 						</div>
 					</div>
 				</div>
@@ -245,7 +241,7 @@
 	</section>
 
 	<!-- Footer-->
-	<footer class="py-3 bg-light">
+	<footer class="py-3" style="background-color: #66B7F4;">
 		<div class="container">
 			<p class="m-0 text-center text-dark">Copyright &copy; Your Website 2023</p>
 		</div>
