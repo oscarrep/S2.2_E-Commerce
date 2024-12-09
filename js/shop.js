@@ -18,7 +18,7 @@ let products = [
     },
     {
         id: 3,
-        name: 'Instant cupcake mixture',
+        name: 'Instant cake mixture',
         price: 5,
         type: 'grocery',
         offer: {
@@ -115,7 +115,7 @@ function calculateTotal() {
         if (item.id === 1 && item.quantity >= 3) {//cooking oil
             let discItem = discounted.find(discItem => discItem.id === 1);
             total += discItem ? discItem.subtotalWithDiscount : item.price * item.quantity;
-        } else if (item.id === 3 && item.quantity >= 10) {//cupcake mix
+        } else if (item.id === 3 && item.quantity >= 10) {//cake mix
             let discItem = discounted.find(discItem => discItem.id === 3);
             total += discItem ? discItem.subtotalWithDiscount : item.price * item.quantity;
         } else {//no discounts
