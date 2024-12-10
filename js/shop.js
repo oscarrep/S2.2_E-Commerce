@@ -93,6 +93,12 @@ function buy(id) {
         cart.push(toAdd);
     }
     console.log(cart);
+
+    qtties = cart.map(items => items.quantity);
+    let count = qtties.reduce((sum, n) => sum + n, 0)
+    console.log('item count: ' + count)
+
+    document.getElementById('count_product').innerHTML = count;
 }
 
 // Exercise 2
@@ -124,7 +130,7 @@ function calculateTotal() {
     });
 
     document.getElementById('total_price').innerHTML = total.toFixed(2);
-    return total;
+    return total.toFixed(2);
 }
 
 // Exercise 4
@@ -156,7 +162,7 @@ function printCart() {
                 <th scope="row">${item.name}</th>
                 <td>$${item.price}</td>
                 <td>${item.quantity}</td>
-                <td>$${item.price * item.quantity}</td>
+                <td>$${(item.price * item.quantity).toFixed(2)}</td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(${item.id})"> - </button></td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="addToCart(${item.id})"> + </button></td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="deleteFromCart(${item.id})"> Delete </button></td>
@@ -181,7 +187,7 @@ function printCart() {
                 <th scope="row">${item.name}</th>
                 <td>$${item.price}</td>
                 <td>${item.quantity}</td>
-                <td>$${item.price * item.quantity}</td>
+                <td>$${(item.price * item.quantity).toFixed(2)}</td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(1)"> - </button></td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="addToCart(1)"> + </button></td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="deleteFromCart(1)"> Delete </button></td>
@@ -207,7 +213,7 @@ function printCart() {
                 <th scope="row">${item.name}</th>
                 <td>$${item.price}</td>
                 <td>${item.quantity}</td>
-                <td>$${item.price * item.quantity}</td>
+                <td>$${(item.price * item.quantity).toFixed(2)}</td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="removeFromCart(3)"> - </button></td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="addToCart(3)"> + </button></td>
                 <td><button class="btn btn-outline-dark fw-bolder" onclick="deleteFromCart(3)"> Delete </button></td>
