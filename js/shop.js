@@ -261,6 +261,7 @@ function addToCart(id) {
     console.log(cart);
 
     // need to update promotions, total and print cart after every removal
+    discounted = []; // if this is not reset price on discounted items wont update
     applyPromotionsCart();
     calculateTotal();
     printCart();
