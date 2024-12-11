@@ -141,6 +141,8 @@ function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
     // TODO: check qtties, if qtty >= offer->number apply discount in ofer->percent
 
+    discounted = []; // set to 0 before calculations so it always updates
+
     cart.forEach(item => {
         if (item.offer && item.quantity >= item.offer.number) {
             let discount = item.price * (item.offer.percent / 100);
@@ -238,16 +240,19 @@ function removeFromCart(id) {
 
     if (cart[cartIndex].quantity > 1) {
         cart[cartIndex].quantity -= 1;
+        count -= 1;
         console.log(`-1 ${cart[cartIndex].name}, remaining: ${cart[cartIndex].quantity}`);
     }
     else if (cart[cartIndex].quantity === 1) {
         console.log(`${cart[cartIndex].name} removed`);
+        count -= 1;
         cart.splice(cartIndex, 1);
     }
+    document.getElementById('count_product').innerHTML = count;
     console.log(cart);
 
     // need to update promotions, total and print cart after every removal
-    discounted = []; // if this is not reset price on discounted items wont update
+    //discounted = []; // if this is not reset price on discounted items wont update
     applyPromotionsCart();
     calculateTotal();
     printCart();
@@ -260,16 +265,18 @@ function addToCart(id) {
     console.log('------ADDING ITEM------');
 
     cart[cartIndex].quantity += 1;
+    count += 1;
     console.log(`+1 ${cart[cartIndex].name}, remaining: ${cart[cartIndex].quantity}`);
+    document.getElementById('count_product').innerHTML = count;
 
     console.log(cart);
 
     // need to update promotions, total and print cart after every removal
-    discounted = []; // if this is not reset price on discounted items wont update
+    //discounted = []; // if this is not reset price on discounted items wont update
     applyPromotionsCart();
     calculateTotal();
     printCart();
-    
+
 }
 
 function deleteFromCart(id) {
@@ -277,12 +284,14 @@ function deleteFromCart(id) {
     console.log('------DELETING ITEM------');
 
     console.log(`${cart[cartIndex].name} removed`);
+    count = count - cart[cartIndex].quantity;
     cart.splice(cartIndex, 1);
-    
+    document.getElementById('count_product').innerHTML = count;
+
     console.log(cart);
-    
+
     // need to update promotions, total and print cart after every removal
-    discounted = []; // if this is not reset price on discounted items wont update
+    //discounted = []; // if this is not reset price on discounted items wont update
     applyPromotionsCart();
     calculateTotal();
     printCart();
