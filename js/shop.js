@@ -76,6 +76,7 @@ let qtties = [];
 let discounted = [];
 
 let total = 0;
+let count = 0;
 
 // Exercise 1
 let productsQtty = products.map(products => ({ ...products, quantity: 0 })); // can't modify products array, so i'm creating a new one with a quantity property
@@ -95,7 +96,7 @@ function buy(id) {
     console.log(cart);
 
     qtties = cart.map(items => items.quantity);
-    let count = qtties.reduce((sum, n) => sum + n, 0)
+    count = qtties.reduce((sum, n) => sum + n, 0)
     console.log('item count: ' + count)
 
     document.getElementById('count_product').innerHTML = count;
@@ -104,9 +105,11 @@ function buy(id) {
 // Exercise 2
 function cleanCart() { // TODO: delete all items from cart array
     total = 0;
+    count = 0;
     cart.splice(0);
     document.getElementById('cart_list').innerHTML = '';
     document.getElementById('total_price').innerHTML = total;
+    document.getElementById('count_product').innerHTML = count;
 }
 
 // Exercise 3
@@ -244,6 +247,7 @@ function removeFromCart(id) {
     console.log(cart);
 
     // need to update promotions, total and print cart after every removal
+    discounted = []; // if this is not reset price on discounted items wont update
     applyPromotionsCart();
     calculateTotal();
     printCart();
@@ -265,7 +269,7 @@ function addToCart(id) {
     applyPromotionsCart();
     calculateTotal();
     printCart();
-
+    
 }
 
 function deleteFromCart(id) {
@@ -274,10 +278,11 @@ function deleteFromCart(id) {
 
     console.log(`${cart[cartIndex].name} removed`);
     cart.splice(cartIndex, 1);
-
+    
     console.log(cart);
-
+    
     // need to update promotions, total and print cart after every removal
+    discounted = []; // if this is not reset price on discounted items wont update
     applyPromotionsCart();
     calculateTotal();
     printCart();
