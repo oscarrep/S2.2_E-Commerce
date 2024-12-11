@@ -96,7 +96,7 @@ function buy(id) {
     console.log(cart);
 
     qtties = cart.map(items => items.quantity);
-    count = qtties.reduce((sum, n) => sum + n, 0)
+    count = qtties.reduce((sum, n) => sum + n, 0);
     console.log('item count: ' + count)
 
     document.getElementById('count_product').innerHTML = count;
@@ -121,13 +121,12 @@ function calculateTotal() {
     qtties = cart.map(items => items.quantity);
     // TODO: multiply price at index i * qtty at index i
     cart.forEach((item) => {
-        if (item.id === 1 && item.quantity >= 3) {//cooking oil
-            let discItem = discounted.find(discItem => discItem.id === 1);
-            total += discItem ? discItem.subtotalWithDiscount : item.price * item.quantity;
-        } else if (item.id === 3 && item.quantity >= 10) {//cake mix
-            let discItem = discounted.find(discItem => discItem.id === 3);
-            total += discItem ? discItem.subtotalWithDiscount : item.price * item.quantity;
-        } else {//no discounts
+        if (item.offer != undefined) { // makes sure item has offer property
+            let discItem = discounted.find(discItem => discItem.id === item.id); // finds item in discounted array
+            console.log(discItem);
+            (discItem) ? total += discItem.subtotalWithDiscount : total += (item.price * item.quantity); // if item is in discounted, total+=subtotalWDiscount if not just price*qtty
+        }
+        else {//no discounts
             total += item.price * item.quantity;
         }
     });
@@ -144,11 +143,11 @@ function applyPromotionsCart() {
     discounted = []; // set to 0 before calculations so it always updates
 
     cart.forEach(item => {
-        if (item.offer && item.quantity >= item.offer.number) {
-            let discount = item.price * (item.offer.percent / 100);
-            let discountedTotal = Number(((item.price - discount) * item.quantity).toFixed(2));
+        if (item.offer && item.quantity >= item.offer.number) { // checks if item has offer and qtty>=offer number
+            let discount = item.price * (item.offer.percent / 100); // calculates discount ammount
+            let discountedTotal = Number(((item.price - discount) * item.quantity).toFixed(2)); // total discount for the item
 
-            discounted.push({ ...item, subtotalWithDiscount: discountedTotal });
+            discounted.push({ ...item, subtotalWithDiscount: discountedTotal }); // push to discounted array with new subtotalWithDiscount property
         }
     });
     return discounted;
